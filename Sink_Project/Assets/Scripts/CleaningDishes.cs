@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CleaningDishes : MonoBehaviour {
+
+    Text GameOverTxt;
 
     int[] cleannum = new int[3];
     GameObject[] cleanObj = new GameObject[3];
@@ -10,6 +13,9 @@ public class CleaningDishes : MonoBehaviour {
 
     void Start()
     {
+        GameOverTxt = GameObject.Find("GameOverText").GetComponent<Text>();
+        GameOverTxt.text = "";
+
         cleannum[0] = 3;
         cleannum[1] = 4;
         cleannum[2] = 5;
@@ -48,5 +54,13 @@ public class CleaningDishes : MonoBehaviour {
                 
         }
          
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.name == "Sink")
+        {
+            GameOverTxt.text = "Game Clear!";
+        }
     }
 }
